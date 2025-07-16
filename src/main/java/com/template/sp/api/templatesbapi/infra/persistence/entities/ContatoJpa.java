@@ -7,7 +7,7 @@ import lombok.Setter;
 @Embeddable
 @Getter
 @Setter
-public class Contato {
+public class ContatoJpa {
     private String telefone;
     private String email;
 }

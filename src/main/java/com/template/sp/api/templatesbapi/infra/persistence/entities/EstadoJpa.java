@@ -4,18 +4,23 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.Immutable;
 
 @Entity
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SequenceGenerator(name = "seq", sequenceName = "estado_id_seq", allocationSize = 1)
+@Table(name = "estado")
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@SequenceGenerator(name = "estado_id_gen", sequenceName = "estado_id_seq", allocationSize = 1)
 @JsonRootName("estado")
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Immutable
-public class Estado extends AbstractEntity {
+public class EstadoJpa extends AbstractEntityJpa {
     @NotBlank
     private String nome;
 

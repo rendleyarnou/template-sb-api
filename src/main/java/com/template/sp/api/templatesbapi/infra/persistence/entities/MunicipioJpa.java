@@ -6,17 +6,22 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 
 @Entity
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SequenceGenerator(name = "seq", sequenceName = "estado_id_seq", allocationSize = 1)
+@Table(name = "municipio")
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@SequenceGenerator(name = "municipio_id_gen", sequenceName = "municipio_id_seq", allocationSize = 1)
 @JsonRootName("municipio")
+@ToString(callSuper = true, exclude = {"estado"})
 @Immutable
-public class Municipio extends AbstractEntity{
+public class MunicipioJpa extends AbstractEntityJpa {
     @Size(max = 60)
     @NotBlank
     private String nome;
@@ -26,8 +31,8 @@ public class Municipio extends AbstractEntity{
     private String ibge;
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id")
     @JsonIgnore
-    private Estado estado;
+    private EstadoJpa estado;
 }

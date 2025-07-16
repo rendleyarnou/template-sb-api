@@ -15,12 +15,13 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
-public abstract class AbstractEntity implements Serializable {
+@SequenceGenerator(name = "shared_seq_gen", sequenceName = "global_entity_id_seq",  allocationSize = 1)
+public abstract class AbstractEntityJpa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shared_seq_gen")
     private Long id;
 
     @GeneratedValue(strategy = GenerationType.AUTO)

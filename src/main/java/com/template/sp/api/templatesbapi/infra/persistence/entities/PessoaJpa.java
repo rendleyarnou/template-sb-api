@@ -8,13 +8,15 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.OffsetDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@MappedSuperclass
+
 @Getter
 @Setter
-public class Pessoa extends AbstractEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@ToString(callSuper = true)
+@MappedSuperclass
+public class PessoaJpa extends AbstractEntityJpa {
     private String nome;
 
     @CPF
@@ -24,8 +26,8 @@ public class Pessoa extends AbstractEntity {
     private OffsetDateTime dataNascimento;
 
     @Embedded
-    private Endereco endereco;
+    private EnderecoJpa endereco;
 
     @Embedded
-    private Contato contato;
+    private ContatoJpa contato;
 }

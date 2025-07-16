@@ -4,13 +4,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Embeddable
-public class Endereco {
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Bairro bairro;
+@Getter
+@Setter
+@ToString(exclude = {"bairro"})
+public class EnderecoJpa {
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BairroJpa bairro;
 
     private String logradouro;
 
